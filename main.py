@@ -1,8 +1,11 @@
+
+import pandas as pd 
+import numpy as np
 from pytikz import LatexPlotGenerator
 
-if __name__ == "__main__":
-    import pandas as pd
-    import numpy as np
+
+def main():
+
 
     # ==============================
     # Example 1: Using a large pandas DataFrame
@@ -24,39 +27,38 @@ if __name__ == "__main__":
         "putMC": putMC_df
     })
 
-    plot_config_df = {
-        "xlabel": r"{$\sigma$}",
-        "ylabel": "{Price}",
-        "title": "{Large Pandas DataFrame Plot}",
-        "legend pos": "north west",
-        "grid": "major",
-        "width": "12cm",
-        "height": "8cm",
-        "xmin": "0",
-        "xmax": "1.1"
-    }
+    generator = LatexPlotGenerator(df, "pandas_data.txt", "pandas_plot_code.tex")
+    generator.set_title("Large Pandas DataFrame Plot")
+    generator.set_labels("{$\\sigma$}", "{Price}")
+    generator.set_legend("north west")
+    generator.set_grid("grid", "major")
+    generator.set_figsize("12cm", "8cm")
+    generator.set_xmin("0")
+    generator.set_xmax("1.1")
+    # (Optionally, you could add set_ymin() and set_ymax() if needed.)
 
-    plot_lines_df = [
-        {
-            "comment": "Plot Crank-Nicolson Call Price (DataFrame).",
-            "options": "mark=o, blue, thick, mark size=2pt",
-            "x": "sigma",
-            "y": "callFD",
-            "legend": "CallFD"
-        },
-        {
-            "comment": "Plot Crank-Nicolson Put Price (DataFrame).",
-            "options": "mark=square*, blue!50!black, thick, mark size=2pt",
-            "x": "sigma",
-            "y": "putFD",
-            "legend": "PutFD"
-        }
-    ]
-
-    # Instantiate and save LaTeX code for the DataFrame example.
-    generator_df = LatexPlotGenerator(df, "pandas_data.txt", "pandas_plot_code.txt", plot_config_df, plot_lines_df)
-    generator_df.save()
-
+    # Add plot lines with options provided as keyword arguments:
+    generator.add_plot_line(
+        table_x="sigma",
+        table_y="callFD",
+        legend="CallFD",
+        mark="o",
+        #color="blue",
+        thick=True,
+        mark_size="2pt",
+        comment="Plot Crank-Nicolson Call Price (DataFrame)"
+    )
+    generator.add_plot_line(
+        table_x="sigma",
+        table_y="putFD",
+        legend="PutFD",
+        mark="square*",
+        color="blue!50!black",
+        thick=True,
+        mark_size="2pt",
+        comment="Plot Crank-Nicolson Put Price (DataFrame)"
+    )
+    generator.save()
 
     # ==============================
     # Example 2: Using a large NumPy array
@@ -64,45 +66,44 @@ if __name__ == "__main__":
     n_np = 200  # Number of data points
     sigma_np = np.linspace(0.1, 1.0, n_np)
     strike_np = np.full(n_np, 40)
-    callFD_np = np.sin(sigma_np) * 10         # Example function for callFD
-    putFD_np = np.cos(sigma_np) * 10           # Example function for putFD
-    callMC_np = np.log(sigma_np + 1) * 10        # Example function for callMC
-    putMC_np = np.sqrt(sigma_np) * 10            # Example function for putMC
+    callFD_np = np.sin(sigma_np) * 10
+    putFD_np = np.cos(sigma_np) * 10
+    callMC_np = np.log(sigma_np + 1) * 10
+    putMC_np = np.sqrt(sigma_np) * 10
 
-    # Combine columns into a large NumPy array (each row represents one data point).
     data_np = np.column_stack((strike_np, sigma_np, callFD_np, putFD_np, callMC_np, putMC_np))
     header_np = ["strike", "sigma", "callFD", "putFD", "callMC", "putMC"]
 
-    plot_config_np = {
-        "xlabel": r"{$\sigma$}",
-        "ylabel": "{Price}",
-        "title": "{Large NumPy Array Plot}",
-        "legend pos": "north west",
-        "grid": "major",
-        "width": "12cm",
-        "height": "8cm",
-        "xmin": "0",
-        "xmax": "1.1"
-    }
+    generator_np = LatexPlotGenerator(data_np, "numpy_data.txt", "numpy_plot_code.tex", header=header_np)
+    generator_np.set_title("Large NumPy Array Plot")
+    generator_np.set_labels("{$\\sigma$}", "{Price}")
+    generator_np.set_legend("north west")
+    generator_np.set_grid("grid", "major")
+    generator_np.set_figsize("12cm", "8cm")
+    generator_np.set_xmin("0")
+    generator_np.set_xmax("1.1")
 
-    plot_lines_np = [
-        {
-            "comment": "Plot Monte Carlo Call Price (NumPy).",
-            "options": "mark=+, red, thick, mark size=2pt",
-            "x": "sigma",
-            "y": "callMC",
-            "legend": "CallMC"
-        },
-        {
-            "comment": "Plot Monte Carlo Put Price (NumPy).",
-            "options": "green, thick, mark size=2pt",
-            "x": "sigma",
-            "y": "putMC",
-            "legend": "PutMC"
-        }
-    ]
-
-    # Instantiate and save LaTeX code for the NumPy array example.
-    generator_np = LatexPlotGenerator(data_np, "numpy_data.txt", "numpy_plot_code.txt", plot_config_np, plot_lines_np, header=header_np)
+    generator_np.add_plot_line(
+        table_x="sigma",
+        table_y="callMC",
+        legend="CallMC",
+        mark="+",
+        color="red",
+        thick=True,
+        comment="Plot Monte Carlo Call Price (NumPy)"
+    )
+    generator_np.add_plot_line(
+        table_x="sigma",
+        table_y="putMC",
+        legend="PutMC",
+        mark="triangle*",
+        color="green",
+        thick=True,
+        comment="Plot Monte Carlo Put Price (NumPy)"
+    )
     generator_np.save()
+
+if __name__ == "__main__":
+    main()
+
 
