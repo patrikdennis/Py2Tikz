@@ -1,7 +1,7 @@
 
 import pandas as pd 
 import numpy as np
-from pytikz.pytikz import PytikzPlot 
+from Py2Tikz.py2tikz import PytikzPlot 
 
 
 def main():

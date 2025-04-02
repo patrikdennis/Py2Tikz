@@ -3,7 +3,7 @@ import tempfile
 import os
 import pandas as pd
 import numpy as np
-from pytikz.pytikz import PytikzPlot# Adjust module name if needed
+from Py2Tikz.py2tikz import PytikzPlot
 
 class TestLatexPlotGenerator(unittest.TestCase):
     def setUp(self):
