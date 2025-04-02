@@ -1,11 +1,11 @@
 # LatexPlotGenerator
 
-**Author:** (Add your name or your organization's name here)  
-**Version:** 1.0  
+**Author:** Patrik Dennis
+**Version:** 0.0.1
 
 ## Overview
 
-LatexPlotGenerator is a utility class for generating LaTeX code (using pgfplots) to create publication-ready plots. It automatically creates:
+LatexPlotGenerator is a utility class for generating LaTeX code to create publication-ready plots. It automatically creates:
 
 1. A `filecontents*` environment block containing the table data (space-delimited).  
 2. A `tikzpicture` environment with an `axis` block and one or more `\addplot[...]` commands.
