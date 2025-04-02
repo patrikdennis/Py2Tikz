@@ -10,7 +10,7 @@ LatexPlotGenerator is a utility class for generating LaTeX code to create public
 1. A `filecontents*` environment block containing the table data (space-delimited).  
 2. A `tikzpicture` environment with an `axis` block and one or more `\addplot[...]` commands.
 
-The end result is a self-contained LaTeX snippet that you can include in your document.
+The end result is a self-contained LaTeX snippet that you can include in your document by simply uploading the `.tex` file in for instance Overleaf and then writing `\input{filename.text}`.
 
 ## Key Features
 
