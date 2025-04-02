@@ -35,7 +35,7 @@ The end result is a self-contained LaTeX snippet that you can include in your do
 ## Basic Usage
 
 ```python
-from pytikz import LatexPlotGenerator
+from Py2Tikz import PyTikzPlot
 import pandas as pd
 
 # 1. Prepare your data (e.g., as a pandas DataFrame)
@@ -46,7 +46,7 @@ data = pd.DataFrame({
 })
 
 # 2. Create an instance of LatexPlotGenerator
-generator = LatexPlotGenerator(
+generator = PyTikzPlot(
     data=data,
     data_filename="mydata.dat",
     latex_filename="myfigure.tex",
@@ -78,7 +78,7 @@ generator.save()
 ## Constructor
 
 ```python
-LatexPlotGenerator(
+PyTikzPlot(
     data,
     data_filename,
     latex_filename,
@@ -156,7 +156,7 @@ x y
 \begin{tikzpicture}
 \centering
   \begin{axis}[
-      title={My Awesome Plot},
+      title={My Plot},
       xlabel={X-axis},
       ylabel={Y-axis},
       legend pos=north east,
