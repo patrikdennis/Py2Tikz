@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 
-class PytikzPlot:
+class PyTikzPlot:
     """
     A class to generate LaTeX code for a plot using pgfplots.
 
