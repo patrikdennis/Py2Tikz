@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="Py2Tikz",
-    version="0.0.1",
+    version="0.0.2",
     author="Patrik Franzén",
     author_email="patrik.franzen.dennis@gmail.com",
     description="A Python library for generating LaTeX pgfplots/tikz code.",
