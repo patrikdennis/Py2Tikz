@@ -23,12 +23,10 @@ The end result is a self-contained LaTeX snippet that you can include in your do
 
 ## Installation
 
-1. Ensure Python 3.x is installed.
-2. Install the necessary Python libraries if they are not already available:
    ```bash
-   pip install numpy pandas
+   pip install Py2Tikz
+   
    ```
-3. Place `pytikz.py` in your project directory (or install it as part of your Python environment).
 
 ---
 
