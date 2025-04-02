@@ -1,7 +1,7 @@
-# LatexPlotGenerator
+# Latex Plot Generator using Py2Tikz
 
 **Author:** Patrik Dennis
-**Version:** v0.0.1
+**Version:** v0.0.3
 
 ## Overview
 
