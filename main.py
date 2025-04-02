@@ -1,7 +1,7 @@
 
 import pandas as pd 
 import numpy as np
-from pytikz import LatexPlotGenerator
+from pytikz import PytikzPlot 
 
 
 def main():
@@ -27,7 +27,7 @@ def main():
         "putMC": putMC_df
     })
 
-    generator = LatexPlotGenerator(df, "pandas_data.txt", "pandas_plot_code.tex")
+    generator = PytikzPlot(df, "pandas_data.txt", "pandas_plot_code.tex")
     generator.set_title("Large Pandas DataFrame Plot")
     generator.set_labels("{$\\sigma$}", "{Price}")
     generator.set_legend("north west")
@@ -74,7 +74,7 @@ def main():
     data_np = np.column_stack((strike_np, sigma_np, callFD_np, putFD_np, callMC_np, putMC_np))
     header_np = ["strike", "sigma", "callFD", "putFD", "callMC", "putMC"]
 
-    generator_np = LatexPlotGenerator(data_np, "numpy_data.txt", "numpy_plot_code.tex", header=header_np)
+    generator_np = PytikzPlot(data_np, "numpy_data.txt", "numpy_plot_code.tex", header=header_np)
     generator_np.set_title("Large NumPy Array Plot")
     generator_np.set_labels("{$\\sigma$}", "{Price}")
     generator_np.set_legend("north west")
