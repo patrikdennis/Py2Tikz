@@ -3,7 +3,7 @@ import tempfile
 import os
 import pandas as pd
 import numpy as np
-from pytikz.pytikz import LatexPlotGenerator  # Adjust module name if needed
+from pytikz.pytikz import PytikzPlot# Adjust module name if needed
 
 class TestLatexPlotGenerator(unittest.TestCase):
     def setUp(self):
@@ -23,7 +23,7 @@ class TestLatexPlotGenerator(unittest.TestCase):
             "sigma": [0.1, 0.2, 0.3],
             "callFD": [0.01, 0.02, 0.03]
         })
-        generator = LatexPlotGenerator(df, self.data_filename, self.temp_latex_file.name)
+        generator = PytikzPlot(df, self.data_filename, self.temp_latex_file.name)
         data_block = generator.generate_data_block()
         self.assertIn("\\begin{filecontents*}", data_block)
         self.assertIn("sigma callFD", data_block)
@@ -34,7 +34,7 @@ class TestLatexPlotGenerator(unittest.TestCase):
             "sigma": [0.1, 0.2, 0.3],
             "callFD": [0.01, 0.02, 0.03]
         }
-        generator = LatexPlotGenerator(data_dict, self.data_filename, self.temp_latex_file.name)
+        generator = PytikzPlot(data_dict, self.data_filename, self.temp_latex_file.name)
         data_block = generator.generate_data_block()
         self.assertIn("sigma callFD", data_block)
         self.assertIn("0.2 0.02", data_block)
@@ -44,7 +44,7 @@ class TestLatexPlotGenerator(unittest.TestCase):
                              [0.2, 0.02],
                              [0.3, 0.03]])
         header = ["sigma", "callFD"]
-        generator = LatexPlotGenerator(np_array, self.data_filename, self.temp_latex_file.name, header=header)
+        generator = PytikzPlot(np_array, self.data_filename, self.temp_latex_file.name, header=header)
         data_block = generator.generate_data_block()
         self.assertIn("sigma callFD", data_block)
         self.assertIn("0.3 0.03", data_block)
@@ -56,7 +56,7 @@ class TestLatexPlotGenerator(unittest.TestCase):
             [0.3, 0.03]
         ]
         header = ["sigma", "callFD"]
-        generator = LatexPlotGenerator(data_list, self.data_filename, self.temp_latex_file.name, header=header)
+        generator = PytikzPlot(data_list, self.data_filename, self.temp_latex_file.name, header=header)
         data_block = generator.generate_data_block()
         self.assertIn("sigma callFD", data_block)
         self.assertIn("0.2 0.02", data_block)
@@ -67,7 +67,7 @@ class TestLatexPlotGenerator(unittest.TestCase):
             "sigma": [0.1, 0.2, 0.3],
             "callFD": [0.01, 0.02, 0.03]
         })
-        generator = LatexPlotGenerator(df, self.data_filename, self.temp_latex_file.name)
+        generator = PytikzPlot(df, self.data_filename, self.temp_latex_file.name)
         # Set some axis options via methods.
         generator.set_title("Test Plot")
         generator.set_labels("{$\\sigma$}", "{Price}")
@@ -89,7 +89,7 @@ class TestLatexPlotGenerator(unittest.TestCase):
             "sigma": [0.1, 0.2, 0.3],
             "callFD": [0.01, 0.02, 0.03]
         }
-        generator = LatexPlotGenerator(data_dict, self.data_filename, self.temp_latex_file.name)
+        generator = PytikzPlot(data_dict, self.data_filename, self.temp_latex_file.name)
         generator.set_title("Test Plot")
         generator.set_labels("{$\\sigma$}", "{Price}")
         generator.set_legend("north west")
@@ -103,13 +103,13 @@ class TestLatexPlotGenerator(unittest.TestCase):
 
     def test_invalid_data_type(self):
         with self.assertRaises(TypeError):
-            generator = LatexPlotGenerator(123, self.data_filename, self.temp_latex_file.name)
+            generator = PytikzPlot(123, self.data_filename, self.temp_latex_file.name)
             generator.generate_data_block()
 
     def test_numpy_without_header(self):
         np_array = np.array([[0.1, 0.01], [0.2, 0.02]])
         with self.assertRaises(ValueError):
-            generator = LatexPlotGenerator(np_array, self.data_filename, self.temp_latex_file.name)
+            generator = PytikzPlot(np_array, self.data_filename, self.temp_latex_file.name)
             generator.generate_data_block()
 
 if __name__ == "__main__":
