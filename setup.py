@@ -4,14 +4,14 @@ with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="pytikz",
+    name="Py2Tikz",
     version="0.0.1",
     author="Patrik Franzén",
     author_email="patrik.franzen.dennis@gmail.com",
     description="A Python library for generating LaTeX pgfplots/tikz code.",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/patrikdennis/pytikz",
+    url="https://github.com/patrikdennis/Py2Tikz",
     packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
